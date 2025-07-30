@@ -43,8 +43,7 @@
 </head>
 <body>
 
-<h2> <img width="527" height="342" alt="image" src="https://github.com/user-attachments/assets/c7a06140-b967-4c89-8e44-0a8bbaad31fd" />
- HomeServE Experience Chatbot</h2>
+<h2> <img width="527" height="342" alt="image" src="https://github.com/user-attachments/assets/c7a06140-b967-4c89-8e44-0a8bbaad31fd"></h2>
 <div id="chatbox">
   <div id="question" class="question"></div>
   <div id="buttons"></div>
