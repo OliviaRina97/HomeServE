@@ -1,1 +1,140 @@
-# HomeServE
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HomeServE Feedback Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      color: #333;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    #chatbox {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      min-height: 200px;
+    }
+    .question {
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .emoji-btn {
+      font-size: 24px;
+      margin: 5px;
+      padding: 10px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .emoji-btn:hover {
+      transform: scale(1.2);
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h2>🏡 HomeServE Experience Chatbot</h2>
+<div id="chatbox">
+  <div id="question" class="question"></div>
+  <div id="buttons"></div>
+</div>
+<div id="result"></div>
+
+<script>
+  const questions = [
+    // Culture (5)
+    "The homestay cultural activities are very interesting.",
+    "I enjoyed knowing the language of the people.",
+    "I have an opportunity to learn their native language.",
+    "The people of the homestay are special.",
+    "There is a unique culture for the homestay.",
+    // Guide Service (6)
+    "Sufficient information about the homestay before the trip.",
+    "The person in charge of the trip understands my needs.",
+    "The guide is friendly to me.",
+    "The guide gives me individual attention.",
+    "The guide is always willing to help me.",
+    "The guide is knowledgeable about the homestay.",
+    // Food & Beverages (3)
+    "There are many choices of food and drinks.",
+    "I can get exotic (special) local food in the homestay.",
+    "I can taste foods that I have never eaten before.",
+    // Environment (4)
+    "Good nature trail(s) is/are found near the homestay.",
+    "There is serenity (quietness) surrounding the homestay.",
+    "Restful and relaxing atmosphere is found at the homestay.",
+    "The homestay environment enables me to relax myself.",
+    // Cleanliness (4)
+    "There is a clean environment surrounding the homestay.",
+    "Guestroom cleanliness is acceptable.",
+    "Food and drinks served are hygienic.",
+    "Bathroom and toilets are clean.",
+    // Accommodation (4)
+    "Enough bathroom/toilets to accommodate visitors.",
+    "I do not have to spend much for the accommodation.",
+    "Sufficient electricity supply in the homestay.",
+    "Water supply is enough for visitors’ use.",
+    // Services (3)
+    "Good telecommunication services (e.g. telephone, internet).",
+    "Tour guiding services are provided.",
+    "Good homestay packages/programmes are available.",
+    // Accessibility (3)
+    "The location of the homestay can be easily found.",
+    "The homestay is easily accessible by the right transport.",
+    "The road condition along the journey is satisfactory."
+  ];
+
+  const ratings = [
+    { value: 1, emoji: "😠", label: "Strongly disagree" },
+    { value: 2, emoji: "😞", label: "Disagree" },
+    { value: 3, emoji: "😐", label: "Slightly disagree" },
+    { value: 4, emoji: "😶", label: "Neutral" },
+    { value: 5, emoji: "🙂", label: "Slightly agree" },
+    { value: 6, emoji: "😀", label: "Agree" },
+    { value: 7, emoji: "🤩", label: "Strongly agree" }
+  ];
+
+  let currentQuestion = 0;
+  const responses = [];
+
+  function showQuestion() {
+    if (currentQuestion < questions.length) {
+      document.getElementById("question").innerText = questions[currentQuestion];
+      const buttonDiv = document.getElementById("buttons");
+      buttonDiv.innerHTML = '';
+      ratings.forEach(rate => {
+        const btn = document.createElement("button");
+        btn.className = "emoji-btn";
+        btn.innerText = rate.emoji;
+        btn.title = `${rate.label} (${rate.value})`;
+        btn.onclick = () => {
+          responses.push(rate.value);
+          currentQuestion++;
+          showQuestion();
+        };
+        buttonDiv.appendChild(btn);
+      });
+    } else {
+      document.getElementById("question").innerText = "🎉 Thank you for your feedback!";
+      document.getElementById("buttons").innerHTML = '';
+      const average = (responses.reduce((a,b) => a+b, 0) / responses.length).toFixed(2);
+      document.getElementById("result").innerText = `⭐ Your average satisfaction rating: ${average}/7`;
+    }
+  }
+
+  showQuestion();
+</script>
+
+</body>
+</html>
